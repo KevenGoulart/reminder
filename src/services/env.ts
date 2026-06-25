@@ -1,0 +1,10 @@
+import { createEnv } from '@t3-oss/env-core';
+import { z } from 'zod';
+
+export const env = createEnv({
+  clientPrefix: 'VITE_',
+  client: {
+    VITE_API_URL: z.string().default('http://localhost:3333/api'),
+  },
+  runtimeEnv: import.meta.env,
+});
