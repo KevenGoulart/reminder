@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  Reminders     Reminder[] @relation("ReminderOwner")
+  RelatedReminders Reminder[] @relation("ReminderRelatedUsers")
+}
+
+model Reminder {
+  id        String   @id @default(uuid())
+  title     String
+  date      DateTime
+  relatedUsers User[] @relation("ReminderRelatedUsers")
+  userId    String
+  User      User     @relation("ReminderOwner", fields: [userId], references: [id])
+}
