@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 import { listReminders } from '#/services/reminder';
+import { formatDateTime } from '#/lib/format-date';
 
 export const Route = createFileRoute('/_protected/reminders')({
   component: RouteComponent,
@@ -20,7 +21,7 @@ function RouteComponent() {
         {data?.data.map((reminder: any) => (
           <div key={reminder.id} className="bg-slate-700 p-4 rounded-md mt-4 w-1/2">
             <h2 className="text-xl text-white font-semibold">{reminder.title}</h2>
-            <p className="text-white">{new Date(reminder.date).toLocaleString()}</p>
+            <p className="text-white">Dia: {formatDateTime(reminder.date)}</p>
             {reminder.recurring && <span className="text-green-500">Recorrente</span>}
           </div>
         ))}
