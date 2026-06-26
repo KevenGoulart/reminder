@@ -6,17 +6,16 @@ import { ReminderRepository } from 'src/repositories/reminder-repository';
 export class ReminderUseCase {
   constructor(private reminderRepository: ReminderRepository) {}
 
-  async createReminder({
-    title,
-    date,
-    userId,
-    relatedUsers,
-  }: CreateReminderDto) {
+  async createReminder({ title, date, userId, recurring }: CreateReminderDto) {
     return this.reminderRepository.createReminder({
       title,
       date,
       userId,
-      relatedUsers,
+      recurring,
     });
+  }
+
+  async listReminders(userId: string) {
+    return this.reminderRepository.listReminders(userId);
   }
 }

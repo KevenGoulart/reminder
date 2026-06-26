@@ -19,6 +19,7 @@ model Reminder {
   id        String   @id @default(uuid())
   title     String
   date      DateTime
+  recurring Boolean
   relatedUsers User[] @relation("ReminderRelatedUsers")
   userId    String
   User      User     @relation("ReminderOwner", fields: [userId], references: [id])

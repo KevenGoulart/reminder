@@ -6,20 +6,21 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class ReminderRepository {
   constructor(private prisma: PrismaService) {}
 
-  async createReminder({
-    title,
-    date,
-    userId,
-    relatedUsers,
-  }: CreateReminderDto) {
+  async createReminder({ title, date, userId, recurring }: CreateReminderDto) {
     await this.prisma.reminder.create({
       data: {
         title,
         date,
         userId,
-        relatedUsers: {
-          connect: relatedUsers.map((id) => ({ id })),
-        },
+        recurring,
+      },
+    });
+  }
+
+  async listReminders(userId: string) {
+    return this.prisma.reminder.findMany({
+      where: {
+        userId,
       },
     });
   }

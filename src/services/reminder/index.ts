@@ -7,3 +7,7 @@ export function createReminder(title: string, date: Date, recurring?: boolean) {
     recurring,
   });
 }
+
+export function listReminders() {
+  return api.get('/reminder/list');
+}

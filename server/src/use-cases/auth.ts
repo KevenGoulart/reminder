@@ -48,7 +48,7 @@ export class AuthUseCase {
 
     return {
       user: { id: user.id, email: user.email },
-      acessToken: await this.jwtService.signAsync(payload),
+      accessToken: await this.jwtService.signAsync(payload),
     };
   }
 }

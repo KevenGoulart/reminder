@@ -1,23 +1,22 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { IsBoolean, IsDate, IsString } from 'class-validator';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
 import { ReminderUseCase } from 'src/use-cases/reminder';
+import { Type } from 'class-transformer';
 
 export class CreateReminderDto {
   @IsString()
   title!: string;
 
+  @Type(() => Date)
   @IsDate()
   date!: Date;
 
-  @IsBoolean()
-  recurring?: boolean;
-
-  @IsString()
   userId!: string;
 
-  @IsString({ each: true })
-  relatedUsers!: string[];
+  @IsBoolean()
+  recurring!: boolean;
 }
 
 @UseGuards(JwtAuthGuard)
@@ -27,14 +26,19 @@ export class ReminderController {
 
   @Post('create')
   createReminder(
-    @Body() { title, date, userId, relatedUsers, recurring }: CreateReminderDto,
+    @Body() { title, date, recurring }: CreateReminderDto,
+    @CurrentUser() user: { sub: string },
   ) {
     return this.reminderUseCase.createReminder({
       title,
       date,
-      userId,
+      userId: user.sub,
       recurring,
-      relatedUsers,
     });
+  }
+
+  @Get('list')
+  listReminders(@CurrentUser() user: { sub: string }) {
+    return this.reminderUseCase.listReminders(user.sub);
   }
 }
