@@ -9,6 +9,9 @@ import { AuthController } from './controllers/auth.controller';
 import { AuthUseCase } from './use-cases/auth';
 import { AuthRepository } from './repositories/auth-repository';
 import { ConfigModule } from '@nestjs/config';
+import { MailService } from './services/mail.service';
+import { BullModule } from '@nestjs/bull';
+import { ReminderProcessor } from './processors/reminder.processor';
 
 @Module({
   imports: [
@@ -18,6 +21,13 @@ import { ConfigModule } from '@nestjs/config';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '7d' },
     }),
+    BullModule.forRoot({
+      redis: {
+        host: process.env.REDIS_HOST,
+        port: Number(process.env.REDIS_PORT),
+      },
+    }),
+    BullModule.registerQueue({ name: 'reminder' }),
   ],
   controllers: [ReminderController, AuthController],
   providers: [
@@ -26,6 +36,8 @@ import { ConfigModule } from '@nestjs/config';
     AuthUseCase,
     AuthRepository,
     JwtAuthGuard,
+    ReminderProcessor,
+    MailService,
   ],
 })
 export class AppModule {}

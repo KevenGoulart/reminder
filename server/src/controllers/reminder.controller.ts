@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { IsBoolean, IsDate, IsString } from 'class-validator';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
@@ -40,5 +40,17 @@ export class ReminderController {
   @Get('list')
   listReminders(@CurrentUser() user: { sub: string }) {
     return this.reminderUseCase.listReminders(user.sub);
+  }
+
+  @Post('add')
+  addDeadbeat(
+    @Body() { email, reminderId }: { email: string; reminderId: string },
+  ) {
+    return this.reminderUseCase.addDeadbeat(email, reminderId);
+  }
+
+  @Get('/list-deadbeats/:reminderId')
+  listDeadbeats(@Param('reminderId') reminderId: string) {
+    return this.reminderUseCase.listDeadbeats(reminderId);
   }
 }

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 import { listReminders } from '#/services/reminder';
-import { formatDateTime } from '#/lib/format-date';
+import { ReminderCard } from '#/components/reminder-card';
 
 export const Route = createFileRoute('/_protected/reminders')({
   component: RouteComponent,
@@ -19,11 +19,7 @@ function RouteComponent() {
         <h1 className="text-4xl text-white font-semibold">Seus lembretes</h1>
 
         {data?.data.map((reminder: any) => (
-          <div key={reminder.id} className="bg-slate-700 p-4 rounded-md mt-4 w-1/2">
-            <h2 className="text-xl text-white font-semibold">{reminder.title}</h2>
-            <p className="text-white">Dia: {formatDateTime(reminder.date)}</p>
-            {reminder.recurring && <span className="text-green-500">Recorrente</span>}
-          </div>
+          <ReminderCard key={reminder.id} reminder={reminder} />
         ))}
       </div>
     </div>

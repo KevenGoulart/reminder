@@ -18,4 +18,12 @@ export class ReminderUseCase {
   async listReminders(userId: string) {
     return this.reminderRepository.listReminders(userId);
   }
+
+  async addDeadbeat(email: string, reminderId: string) {
+    return this.reminderRepository.addDeadbeat(email, reminderId);
+  }
+
+  async listDeadbeats(reminderId: string) {
+    return this.reminderRepository.listDeadbeats(reminderId);
+  }
 }

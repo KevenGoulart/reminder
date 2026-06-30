@@ -12,7 +12,6 @@ model User {
   email     String   @unique
   password  String
   Reminders     Reminder[] @relation("ReminderOwner")
-  RelatedReminders Reminder[] @relation("ReminderRelatedUsers")
 }
 
 model Reminder {
@@ -20,7 +19,8 @@ model Reminder {
   title     String
   date      DateTime
   recurring Boolean
-  relatedUsers User[] @relation("ReminderRelatedUsers")
+  notifiedAt DateTime?
+  relatedUsers String[]
   userId    String
   User      User     @relation("ReminderOwner", fields: [userId], references: [id])
 }
