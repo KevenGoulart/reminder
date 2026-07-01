@@ -44,7 +44,7 @@ export function CreateDeadbeatModal({ reminderId }: { reminderId: string }) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="bg-slate-300 hover:bg-slate-400 text-slate-800 p-1 rounded-lg cursor-pointer max-w-40 mx-auto mt-2">
+      <DialogTrigger className="bg-slate-300 hover:bg-slate-400 text-slate-800 p-1 px-2 rounded-lg cursor-pointer max-w-40 mx-auto mt-2">
         Adicionar Caloteiro
       </DialogTrigger>
       <DialogContent className="bg-slate-500">

@@ -23,8 +23,6 @@ const formSchema = z.object({
 
 export const Route = createFileRoute('/')({ component: Home });
 
-const { setToken } = useAuthStore();
-
 function Home() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,13 +32,15 @@ function Home() {
     },
   });
 
+  const { setToken } = useAuthStore();
+
   const navigate = useNavigate();
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
       const response = await loginUser(data.email, data.password);
 
-      setToken(response.data.token);
+      setToken(response.data.accessToken);
 
       toast('Login feito com sucesso');
 

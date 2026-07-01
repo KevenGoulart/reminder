@@ -32,7 +32,7 @@ export function ReminderCard({ reminder }: { reminder: ReminderProps }) {
       <CreateDeadbeatModal reminderId={reminder.id} />
       <h2 className="text-slate-200 mt-2 text-xl pl-2">Caloteiros: </h2>
       {deadbeats?.data.relatedUsers.map((relatedUser: string) => (
-        <div className="bg-slate-300 flex flex-col p-2 rounded-lg mt-2 max-w-[80%] mx-auto">
+        <div className="bg-slate-300 flex flex-col p-2 rounded-lg mt-1 min-w-[60%] max-w-[80%] mx-auto">
           <p key={relatedUser}>{relatedUser}</p>
         </div>
       ))}

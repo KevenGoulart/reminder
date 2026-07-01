@@ -18,7 +18,7 @@ export function Header() {
   };
   return (
     <div className="bg-slate-700 p-4 flex">
-      <Link to="/" className="text-4xl text-white ml-4 mr-6">
+      <Link to="/" className="text-3xl text-white ml-4 mr-6">
         Alerta Caloteiro
       </Link>
       <div className="flex items-center gap-2 text-2xl ml-auto">
