@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProtectedRemindersRouteImport } from './routes/_protected/reminders'
@@ -19,11 +18,6 @@ import { Route as ProtectedHomeRouteImport } from './routes/_protected/home'
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
@@ -48,14 +42,12 @@ const ProtectedHomeRoute = ProtectedHomeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof ProtectedHomeRoute
   '/reminders': typeof ProtectedRemindersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof ProtectedHomeRoute
   '/reminders': typeof ProtectedRemindersRoute
@@ -64,21 +56,19 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_protected': typeof ProtectedRouteRouteWithChildren
-  '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_protected/home': typeof ProtectedHomeRoute
   '/_protected/reminders': typeof ProtectedRemindersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register' | '/home' | '/reminders'
+  fullPaths: '/' | '/register' | '/home' | '/reminders'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register' | '/home' | '/reminders'
+  to: '/' | '/register' | '/home' | '/reminders'
   id:
     | '__root__'
     | '/'
     | '/_protected'
-    | '/login'
     | '/register'
     | '/_protected/home'
     | '/_protected/reminders'
@@ -87,7 +77,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
-  LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
 }
 
@@ -98,13 +87,6 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_protected': {
@@ -155,7 +137,6 @@ const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
-  LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport

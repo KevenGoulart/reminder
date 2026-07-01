@@ -7,7 +7,7 @@ export class MailService {
 
   async sendReminderEmail(to: string, reminderTitle: string) {
     await this.resend.emails.send({
-      from: 'email@gmail.com',
+      from: 'kevengoulartmm@gmail.com',
       to,
       subject: `Lembrete: ${reminderTitle}`,
       html: `<p>Você tem um lembrete hoje: <strong>${reminderTitle}</strong></p>`,

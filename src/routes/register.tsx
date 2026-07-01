@@ -54,8 +54,6 @@ function RouteComponent() {
   return (
     <div className="bg-slate-800 min-h-screen text-white gap-6">
       <div className="flex items-center justify-center flex-col gap-6 py-10">
-        <h1 className="text-4xl font-bold">Cadastro</h1>
-
         <Card className="w-full sm:max-w-md">
           <CardHeader>
             <CardTitle>Cadastro</CardTitle>
@@ -102,7 +100,7 @@ function RouteComponent() {
             </form>
             <p className="text-center mt-4 text-sm text-slate-700">
               Já tem uma conta?{' '}
-              <Link className="underline" to={'/login'}>
+              <Link className="underline" to={'/'}>
                 Faça login
               </Link>
             </p>

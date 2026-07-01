@@ -1,17 +1,11 @@
 import { createFileRoute, redirect, Outlet } from '@tanstack/react-router';
-
-function getCookie(name: string): string | undefined {
-  return document.cookie
-    .split('; ')
-    .find((row) => row.startsWith(`${name}=`))
-    ?.split('=')[1];
-}
+import { useAuthStore } from '#/store/auth';
 
 export const Route = createFileRoute('/_protected')({
   beforeLoad: () => {
-    const session = getCookie('token-re');
+    const token = useAuthStore.getState().token;
 
-    if (!session) {
+    if (!token) {
       throw redirect({ to: '/' });
     }
   },

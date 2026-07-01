@@ -14,13 +14,15 @@ function RouteComponent() {
   });
 
   return (
-    <div className="bg-slate-800 min-h-screen flex justify-center pt-10">
+    <div className="bg-slate-800 min-h-screen flex justify-center pt-2">
       <div className="flex flex-col items-center w-full max-w-4xl">
         <h1 className="text-4xl text-white font-semibold">Seus lembretes</h1>
 
-        {data?.data.map((reminder: any) => (
-          <ReminderCard key={reminder.id} reminder={reminder} />
-        ))}
+        <div className="flex gap-2 mt-4 w-full">
+          {data?.data.map((reminder: any) => (
+            <ReminderCard key={reminder.id} reminder={reminder} />
+          ))}
+        </div>
       </div>
     </div>
   );

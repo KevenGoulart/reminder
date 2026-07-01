@@ -41,7 +41,7 @@ export function CreateReminderForm() {
   }
 
   return (
-    <Card className="w-full sm:max-w-md bg-slate-300">
+    <Card className="w-full sm:max-w-md bg-slate-400">
       <CardHeader>
         <CardTitle>Criar Lembrete</CardTitle>
       </CardHeader>
@@ -60,6 +60,7 @@ export function CreateReminderForm() {
                     aria-invalid={fieldState.invalid}
                     placeholder="Exemplo: Mensalidade netflix"
                     autoComplete="off"
+                    className="bg-slate-100"
                   />
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                 </Field>
@@ -81,8 +82,10 @@ export function CreateReminderForm() {
               control={form.control}
               render={({ fieldState, field }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="reminder-form-recurring">Repetir</FieldLabel>
-                  <Switch checked={field.value} onCheckedChange={field.onChange} id="reminder-form-recurring" />
+                  <div className="flex items-center gap-2">
+                    <FieldLabel htmlFor="reminder-form-recurring">Repetir</FieldLabel>
+                    <Switch checked={field.value} onCheckedChange={field.onChange} id="reminder-form-recurring" />
+                  </div>
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                 </Field>
               )}
@@ -92,7 +95,7 @@ export function CreateReminderForm() {
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal" className="flex justify-end">
-          <Button type="submit" form="reminder-form">
+          <Button type="submit" form="reminder-form" className="p-3 py-4">
             Criar
           </Button>
         </Field>

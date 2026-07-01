@@ -44,12 +44,12 @@ export function CreateDeadbeatModal({ reminderId }: { reminderId: string }) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="bg-slate-300 hover:bg-slate-400 text-slate-800 p-1 rounded-lg cursor-pointer max-w-40">
+      <DialogTrigger className="bg-slate-300 hover:bg-slate-400 text-slate-800 p-1 rounded-lg cursor-pointer max-w-40 mx-auto mt-2">
         Adicionar Caloteiro
       </DialogTrigger>
-      <DialogContent className="bg-slate-400">
+      <DialogContent className="bg-slate-500">
         <DialogHeader>
-          <DialogTitle>Adicione um caloteiro</DialogTitle>
+          <DialogTitle className="text-slate-100">Adicione um caloteiro</DialogTitle>
           <DialogDescription>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Input
@@ -57,7 +57,7 @@ export function CreateDeadbeatModal({ reminderId }: { reminderId: string }) {
                 placeholder="Email do caloteiro"
                 {...register('email')}
               />
-              <Button className="mt-2" type="submit" disabled={isSubmitting}>
+              <Button className="flex mt-2 ml-auto" type="submit" disabled={isSubmitting}>
                 {isSubmitting ? 'Salvando' : 'Adicionar'}
               </Button>
             </form>

@@ -7,15 +7,14 @@ export const Route = createFileRoute('/_protected/home')({
 
 function RouteComponent() {
   return (
-    <div className="bg-slate-800 min-h-screen flex justify-center pt-20">
+    <div className="bg-slate-800 min-h-screen flex justify-center pt-6">
       <div className="flex flex-col gap-4 items-center">
-        <h1 className="text-4xl text-white font-semibold">Alerta Caloteiro</h1>
         <div className="flex items-center gap-4">
           <Link
-            className="bg-slate-300 hover:bg-slate-400 text-slate-800 p-2 rounded-lg cursor-pointer"
+            className="bg-slate-300 hover:bg-slate-400 min-h-20 min-w-56 text-xl flex items-center justify-center  text-slate-800 p-2 rounded-lg cursor-pointer"
             to="/reminders"
           >
-            Ver seus lembretes
+            Ver lembretes criados
           </Link>
 
           <CreateReminderModal />
